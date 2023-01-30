@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import StoreTodo from './store/StoreTodo'
 function App() {
-  const {tasks,  addTasks, toggleComplete, removeTodo,saveTasks } = StoreTodo()
+  const {tasks,  addTasks, toggleComplete, removeTask,saveTasks } = StoreTodo()
   const inputRef = useRef()
 
   const addTask = () => {
@@ -37,7 +37,7 @@ function App() {
             </span>
 
             <span
-            onClick={() => {removeTodo(index);saveTasks()}}
+            onClick={() => {removeTask(index);saveTasks()}}
             >🗑️</span>
           </li>
         ))}

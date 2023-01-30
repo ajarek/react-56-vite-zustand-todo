@@ -13,7 +13,7 @@ const StoreTodo = create((set) => ({
       updatedTasks[index].completed = !updatedTasks[index].completed
       return { tasks: updatedTasks }
     }),
-    removeTodo: (index) => set(state => ({
+    removeTask: (index) => set(state => ({
       tasks: state.tasks.filter((_, i) => i !== index),
       
       

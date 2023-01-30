@@ -15,22 +15,18 @@ const StoreTodo = create((set) => ({
     }),
     removeTodo: (index) => set(state => ({
       tasks: state.tasks.filter((_, i) => i !== index),
-     
+      
+      
   })),
-//   saveTasks: () => {
+  saveTasks: () => {
    
-//     set((state) => {
-//     const tasksAll = [...state.tasks];
-//     window.localStorage.setItem('tasks', JSON.stringify(tasksAll))
-//     })
+    set((state) => {
+      window.localStorage.setItem('tasks', JSON.stringify(state.tasks));
+      return { state};
+    })
   
-// },
-// loadTasks: () => {
-//     const tasks = window.localStorage.getItem('tasks');
-//     if (tasks) {
-//         set(state => ({ tasks: JSON.parse(tasks) }));
-//     }
-// }
+},
+
 }))
 
 export default StoreTodo

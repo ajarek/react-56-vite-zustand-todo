@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import StoreTodo from './store/StoreTodo'
 function App() {
-  const {tasks,  addTasks, toggleComplete, removeTodo } = StoreTodo()
+  const {tasks,  addTasks, toggleComplete, removeTodo,saveTasks } = StoreTodo()
   const inputRef = useRef()
 
   const addTask = () => {
@@ -12,12 +12,9 @@ function App() {
     }
     addTasks(newTask)
     inputRef.current.value = ''
-    
+    saveTasks()
   }
- const saveTasks=() => {
-  const tasksAll = [...tasks];
-    window.localStorage.setItem('tasks', JSON.stringify(tasksAll))
- }
+
   return (
     <div className='App'>
       <h4>Number of Tasks {tasks.length} </h4>
@@ -40,12 +37,12 @@ function App() {
             </span>
 
             <span
-            onClick={() => removeTodo(index)}
+            onClick={() => {removeTodo(index);saveTasks()}}
             >🗑️</span>
           </li>
         ))}
       </ul>
-      <button onClick={saveTasks}>Save Tasks</button>
+      {/* <button onClick={saveTasks}>Save Tasks</button> */}
     </div>
   )
 }

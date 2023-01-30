@@ -1,10 +1,7 @@
 import { create } from 'zustand'
 
 const StoreTodo = create((set) => ({
-  tasks: [
-    { id: '0', description: 'Umyć okna', completed: false },
-    { id: '1', description: 'Zrobić Zakupy', completed: true },
-  ],
+  tasks:JSON.parse(window.localStorage.getItem('tasks'))|| [],
   addTasks: (task) => {
     set((state) => ({
       tasks: [...state.tasks, task],
@@ -17,7 +14,8 @@ const StoreTodo = create((set) => ({
       return { tasks: updatedTasks }
     }),
     removeTodo: (index) => set(state => ({
-      tasks: state.tasks.filter((_, i) => i !== index)
+      tasks: state.tasks.filter((_, i) => i !== index),
+     
   })),
 //   saveTasks: () => {
    

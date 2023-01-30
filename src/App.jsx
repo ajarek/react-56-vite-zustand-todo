@@ -45,7 +45,7 @@ function App() {
           </li>
         ))}
       </ul>
-      <button onClick={saveTasks()}>Save Tasks</button>
+      <button onClick={saveTasks}>Save Tasks</button>
     </div>
   )
 }

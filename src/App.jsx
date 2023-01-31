@@ -1,10 +1,11 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import StoreTodo from './store/StoreTodo'
 function App() {
-  const {tasks,  addTasks, toggleComplete, removeTask,saveTasks } = StoreTodo()
+  const { tasks, addTasks, toggleComplete, removeTask, saveTasks } = StoreTodo()
   const inputRef = useRef()
 
   const addTask = () => {
+    if(inputRef.current.value){
     const newTask = {
       id: tasks.length,
       description: inputRef.current.value,
@@ -14,13 +15,20 @@ function App() {
     inputRef.current.value = ''
     saveTasks()
   }
+  return
+  }
 
   return (
     <div className='App'>
       <h4>Number of Tasks {tasks.length} </h4>
       <p>Add a New Task</p>
-      <input ref={inputRef} />
+      <form>
+      <input 
+      ref={inputRef}
+      placeholder={'text...'} 
+      />
       <button onClick={addTask}>Add a Task</button>
+      </form>
       <ul>
         {tasks.map((task, index) => (
           <li key={task.id}>
@@ -37,8 +45,13 @@ function App() {
             </span>
 
             <span
-            onClick={() => {removeTask(index);saveTasks()}}
-            >🗑️</span>
+              onClick={() => {
+                removeTask(index)
+                saveTasks()
+              }}
+            >
+              🗑️
+            </span>
           </li>
         ))}
       </ul>

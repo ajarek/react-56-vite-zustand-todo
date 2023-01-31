@@ -1,9 +1,9 @@
-import { useRef } from 'react'
+import { useRef,useEffect } from 'react'
 import StoreTodo from './store/StoreTodo'
 function App() {
   const { tasks, addTasks, toggleComplete, removeTask, saveTasks } = StoreTodo()
   const inputRef = useRef()
-
+  
   const addTask = () => {
     if(inputRef.current.value){
     const newTask = {
@@ -15,8 +15,10 @@ function App() {
     inputRef.current.value = ''
     saveTasks()
   }
-  return
   }
+  useEffect(() => {
+    inputRef.current.focus()
+}, [])
 
   return (
     <div className='App'>
@@ -26,6 +28,7 @@ function App() {
       <input 
       ref={inputRef}
       placeholder={'text...'} 
+     
       />
       <button onClick={addTask}>Add a Task</button>
       </form>

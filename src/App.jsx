@@ -1,36 +1,35 @@
-import { useRef,useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import StoreTodo from './store/StoreTodo'
 function App() {
   const { tasks, addTasks, toggleComplete, removeTask, saveTasks } = StoreTodo()
   const inputRef = useRef()
-  
+
   const addTask = () => {
-    if(inputRef.current.value){
-    const newTask = {
-      id: tasks.length,
-      description: inputRef.current.value,
-      completed: false,
+    if (inputRef.current.value) {
+      const newTask = {
+        id: tasks.length,
+        description: inputRef.current.value,
+        completed: false,
+      }
+      addTasks(newTask)
+      inputRef.current.value = ''
+      saveTasks()
     }
-    addTasks(newTask)
-    inputRef.current.value = ''
-    saveTasks()
-  }
   }
   useEffect(() => {
     inputRef.current.focus()
-}, [])
+  }, [])
 
   return (
     <div className='App'>
       <h4>Number of Tasks {tasks.length} </h4>
       <p>Add a New Task</p>
       <form>
-      <input 
-      ref={inputRef}
-      placeholder={'text...'} 
-     
-      />
-      <button onClick={addTask}>Add a Task</button>
+        <input
+          ref={inputRef}
+          placeholder={'text...'}
+        />
+        <button onClick={addTask}>Add a Task</button>
       </form>
       <ul>
         {tasks.map((task, index) => (
@@ -58,7 +57,6 @@ function App() {
           </li>
         ))}
       </ul>
-      {/* <button onClick={saveTasks}>Save Tasks</button> */}
     </div>
   )
 }
